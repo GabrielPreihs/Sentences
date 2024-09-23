@@ -30,11 +30,16 @@ public class SecurityConfig {
 	@Value("${jwt.public.key}")
 	private RSAPublicKey key;
 	
+	private static final String[] AUTH_WHITELIST = {
+	        "/authenticate"
+	};
+	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests(
-					auth -> auth.requestMatchers("/authenticate").permitAll() // authenticate routes opened
+					auth -> auth.requestMatchers(AUTH_WHITELIST).permitAll() // authenticate routes opened
+						.requestMatchers("authenticate").permitAll()
 						.anyRequest().authenticated()) // others need authentication
 						.httpBasic(Customizer.withDefaults())
 						.oauth2ResourceServer(

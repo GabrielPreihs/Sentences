@@ -12,7 +12,7 @@ public class AuthenticationController {
 		this.authService = authService;
 	}
 	
-	@PostMapping("authenticate")
+	@PostMapping(path = "authenticate")
 	public String authenticate(Authentication authentication) {
 		return authService.authenticate(authentication);
 	}
