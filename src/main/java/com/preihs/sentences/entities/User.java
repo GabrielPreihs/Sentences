@@ -1,6 +1,7 @@
 package com.preihs.sentences.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -79,6 +80,17 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	
-	
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public void setRoles(Role role) {
+		List<Role> singleRole = new ArrayList<>();
+		singleRole.add(role);
+		this.roles = singleRole;
+	}
 }
